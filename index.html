@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Invitation | Ana & Codrin</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Montserrat:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --env-color: #1e2419;
+            --env-flap: #2a3224;
+            --card-bg: #fdfcf0;
+            --ivory: #faf9f6;
+            --gold: #c5a059;
+            --text: #2c3e50;
+            --max-content: 900px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
+            background-color: #f4efdf;
+            color: var(--text);
+        }
+
+        /* --- STAGE 1: ENVELOPE (Strictly Unchanged) --- */
+        #stage-envelope {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            perspective: 1000px;
+            padding: 20px;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: var(--env-color);
+            cursor: pointer;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid var(--env-flap);
+            transform-origin: top;
+            transition: transform 0.8s ease-in-out;
+            z-index: 4;
+        }
+
+        .pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 110px solid var(--env-color);
+            z-index: 3;
+        }
+
+        .pocket-sides {
+            position: absolute;
+            bottom: 0;
+            width: 300px;
+            height: 200px;
+            background: var(--env-color);
+            clip-path: polygon(0 0, 150px 100px, 100% 0, 100% 100%, 0 100%);
+            z-index: 2;
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 78px;
+            left: 118px;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel';
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            background: radial-gradient(circle at 30% 30%, #f4dca3 0%, #e0be78 35%, #b38942 70%, #8a6229 100%);
+            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.45), inset 0 4px 6px rgba(255, 255, 255, 0.25), inset 0 -6px 10px rgba(0, 0, 0, 0.35);
+            transform: rotate(-4deg);
+            transition: transform 0.3s ease, opacity 0.5s ease;
+        }
+
+        .wax-seal::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            box-shadow: 0 2px 0 rgba(255, 255, 255, 0.12) inset, 0 -2px 8px rgba(0, 0, 0, 0.18) inset;
+            background: radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.06) 0%, transparent 30%);
+            pointer-events: none;
+        }
+
+        .wax-seal::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 78%;
+            height: 78%;
+            border-radius: 50%;
+            box-shadow: inset 0 6px 8px rgba(0, 0, 0, 0.35), inset 0 -6px 10px rgba(255, 255, 255, 0.06);
+            background: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.06) 0%, transparent 55%);
+            mix-blend-mode: multiply;
+            pointer-events: none;
+        }
+
+        .wax-seal .stamp {
+            position: relative;
+            z-index: 12;
+            transform: translateY(1px);
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 13px;
+            font-weight: 700;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 -3px 6px rgba(0, 0, 0, 0.45);
+            letter-spacing: 1px;
+            user-select: none;
+        }
+
+        .wax-drip {
+            position: absolute;
+            bottom: -6px;
+            left: 54%;
+            width: 6px;
+            height: 10px;
+            border-radius: 4px/6px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.18));
+            transform: rotate(-8deg);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.35);
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 280px;
+            height: 180px;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+            transition: transform 0.8s ease-in-out;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .letter::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: var(--card-bg);
+            z-index: 0;
+            border: 1px solid var(--gold);
+        }
+
+        .envelope-wrapper.open .flap {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .envelope-wrapper.open .wax-seal {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .envelope-wrapper.open .letter {
+            transform: translateY(-120px) scale(1.1);
+            z-index: 5;
+        }
+
+        /* --- STAGE 2: FULL INVITE --- */
+        .full-invite {
+            display: none;
+            background: var(--ivory);
+            min-height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* --- NAVIGATION --- */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 249, 246, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateY(-100%);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .top-nav.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .top-nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 20px;
+            margin: 0;
+            gap: 40px;
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            font-family: 'Cinzel';
+            color: var(--env-color);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        /* --- HERO --- */
+        .hero-section {
+            width: 100%;
+            background-image: url("bg-us-2.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            height: 200px;
+            transition: height 1.4s cubic-bezier(.25, .9, .25, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 4px double var(--gold);
+        }
+
+        .hero-section.revealed {
+            height: 105vh;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            margin: 0;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- CONTENT DESIGN --- */
+        .content-container {
+            max-width: var(--max-content);
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .section {
+            padding: 80px 40px;
+            margin-bottom: 40px;
+            background: white;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            position: relative;
+            animation: fadeIn 1.5s;
+        }
+
+        /* Decorative Corners */
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            pointer-events: none;
+        }
+
+        h2 {
+            font-family: 'Cinzel';
+            color: var(--gold);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+
+        .ornament {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        .location-card {
+            margin-bottom: 60px;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 400px;
+            border: 1px solid var(--gold);
+            margin-top: 25px;
+            filter: grayscale(0.2);
+        }
+
+        /* --- RSVP FORM --- */
+        form {
+            background: transparent;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .guest-box {
+            padding: 30px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            margin-bottom: 30px;
+            background: var(--ivory);
+        }
+
+        .form-group label {
+            font-family: 'Cinzel';
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: white;
+            font-family: 'Playfair Display';
+            font-size: 1rem;
+            margin-top: 8px;
+            transition: border 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+
+        .submit-btn {
+            background: var(--env-color);
+            color: white;
+            border: 1px solid var(--gold);
+            padding: 22px;
+            width: 100%;
+            cursor: pointer;
+            font-family: 'Cinzel';
+            letter-spacing: 4px;
+            font-weight: 700;
+            transition: 0.4s;
+        }
+
+        .submit-btn:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        /* --- COUNTDOWN --- */
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 400px;
+        }
+        
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            min-width: 100px;
+        }
+
+        .time-box span {
+            display: block;
+            font-family: 'Cinzel';
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .time-box label {
+            font-size: 0.65rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 40px 20px;
+            }
+
+            .hero-section.revealed {
+                height: 100vh;
+            }
+
+            #countdown {
+                gap: 10px;
+            }
+
+            .time-box {
+                min-width: 70px;
+                padding: 10px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="top-nav">
+        <ul>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#description">STORY</a></li>
+            <li><a href="#location">DETAILS</a></li>
+            <li><a href="#confirmation">RSVP</a></li>
+        </ul>
+    </nav>
+
+    <div id="stage-envelope">
+        <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
+            <div class="flap"></div>
+            <div class="wax-seal" aria-hidden="true">
+                <span class="stamp">A & C</span>
+                <div class="wax-drip"></div>
+            </div>
+            <div class="pocket"></div>
+            <div class="pocket-sides"></div>
+            <div class="letter">
+                <div class="letter-photo"></div>
+                <div style="position:relative; z-index:2">
+                    <p style="font-size:0.6rem; letter-spacing:3px; margin:0; color: var(--gold);">THE WEDDING OF</p>
+                    <h2 style="margin:10px 0; font-size: 1.5rem;">Ana & Codrin</h2>
+                    <p style="font-size:0.8rem; margin:0;">12 . 09 . 2026</p>
+                </div>
+            </div>
+        </div>
+        <p
+            style="color:var(--env-color); margin-top:100px; letter-spacing:4px; font-size:0.75rem; font-family: 'Cinzel'; font-weight: bold;">
+            TAP TO UNVEIL</p>
+    </div>
+
+    <div class="full-invite" id="fullInvite">
+        <div class="hero-section" id="home">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Ana & Codrin</h1>
+                <div class="ornament">~ ✧ ~</div>
+                <p style="letter-spacing:6px; font-family: 'Cinzel'; font-size:1.1rem;">SEPTEMBER 12, 2026</p>
+
+                <div id="countdown">
+                    <div class="time-box">
+                        <span id="days">0</span>
+                        <label>Days</label>
+                    </div>
+                    <div class="time-box">
+                        <span id="hours">0</span>
+                        <label>Hours</label>
+                    </div>
+                    <div class="time-box">
+                        <span id="minutes">0</span>
+                        <label>Mins</label>
+                    </div>
+                    <div class="time-box">
+                        <span id="seconds">0</span>
+                        <label>Secs</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container">
+            <div class="section" id="description">
+                <h2>Our Story</h2>
+                <div class="ornament">❦</div>
+                <p style="font-size: 1.2rem; line-height: 2; max-width: 700px; margin: 0 auto; font-style: italic;">
+                    With hearts full of love and gratitude, we invite you to celebrate
+                    the beginning of our forever. What started as a simple meeting grew
+                    into a journey filled with laughter, adventure, and endless support.
+                    Your presence on our special day means more to us than words can express.
+                </p>
+            </div>
+
+            <div class="section" id="location">
+                <div class="location-card">
+                    <h2>The Ceremony</h2>
+                    <p style="font-size: 1.3rem;"><strong>Biserica Sfânta Treime</strong></p>
+                    <p style="letter-spacing: 2px;">2:45 PM</p>
+                    <p style="letter-spacing: 2px;">CALEA 13 SEPTEMBRIE 211, BUCUREȘTI</p>
+                    <div class="map-frame">
+                        <iframe
+                            src="https://maps.google.com/maps?q=Biserica%20Sfanta%20Treime%20Ghencea%20Bucuresti&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="ornament" style="margin: 80px 0;">✧ ✧ ✧</div>
+
+                <div class="location-card">
+                    <h2>The Celebration</h2>
+                    <p style="font-size: 1.3rem;"><strong>Lagoo Snagov, Salon Luna</strong></p>
+                    <p style="letter-spacing: 2px;">8 PM</p>
+                    <p style="letter-spacing: 2px;">DJ101B, Comuna Snagov 077165</p>
+                    <div class="map-frame">
+                        <iframe
+                            src="https://maps.google.com/maps?q=Lagoo%20Snagov%2C%20DJ101B%2C%20Comuna%20Snagov%20077165%2C%20Romania&z=15&output=embed"
+                            width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen>
+                        </iframe>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="confirmation">
+                <h2>RSVP</h2>
+                <p style="margin-bottom: 40px; font-style: italic;">Kindly respond by July 1st, 2026</p>
+
+                <form id="rsvpForm">
+                    <div class="form-group" style="margin-bottom:30px;">
+                        <label>Total Number of Guests</label>
+                        <select id="guestCount" onchange="updateGuestFields()">
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                        </select>
+                    </div>
+
+                    <div class="guest-box">
+                        <span
+                            style="font-family: 'Cinzel'; color: var(--gold); display: block; margin-bottom: 15px; font-weight: bold;">GUEST
+                            ONE</span>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" id="f1" required placeholder="Ana" />
+                            </div>
+                            <div class="form-group">
+                                <label>Family Name</label>
+                                <input type="text" id="l1" required placeholder="Popescu" />
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:15px;">
+                            <label>Menu Choice</label>
+                            <select id="m1">
+                                <option value="Standard">Standard Menu</option>
+                                <option value="Vegetarian">Vegetarian Menu</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="guest2Area" class="guest-box" style="display:none;">
+                        <span
+                            style="font-family: 'Cinzel'; color: var(--gold); display: block; margin-bottom: 15px; font-weight: bold;">GUEST
+                            TWO</span>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" id="f2" placeholder="Codrin" />
+                            </div>
+                            <div class="form-group">
+                                <label>Family Name</label>
+                                <input type="text" id="l2" placeholder="Ionescu" />
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:15px;">
+                            <label>Menu Choice</label>
+                            <select id="m2">
+                                <option value="Standard">Standard Menu</option>
+                                <option value="Vegetarian">Vegetarian Menu</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:30px;">
+                        <label>Number of Children</label>
+                        <input type="number" id="child" value="0" min="0" />
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="subBtn">SUBMIT RSVP</button>
+                </form>
+
+                <h3 id="thankYou" style="display:none; color: var(--gold); margin-top:20px; font-family: 'Cinzel';">We
+                    have received your answer. Thank you!</h3>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const scriptURL = 'YOUR_GOOGLE_URL_HERE';
+
+        function openEnvelope() {
+            document.getElementById('envelope').classList.add('open');
+            const music = document.getElementById('bgMusic');
+            if (music && music.paused) { music.play().catch(() => { }); }
+
+            setTimeout(() => {
+                document.getElementById('stage-envelope').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('stage-envelope').style.display = 'none';
+                    document.getElementById('fullInvite').style.display = 'flex';
+                    document.querySelector('.top-nav').classList.add('visible');
+                    setTimeout(() => {
+                        document.getElementById('home').classList.add('revealed');
+                    }, 300);
+                }, 800);
+            }, 2500);
+        }
+
+        function updateGuestFields() {
+            const count = document.getElementById('guestCount').value;
+            const g2 = document.getElementById('guest2Area');
+            if (count === "2") {
+                g2.style.display = 'block';
+                document.getElementById('f2').required = true;
+                document.getElementById('l2').required = true;
+            } else {
+                g2.style.display = 'none';
+                document.getElementById('f2').required = false;
+                document.getElementById('l2').required = false;
+            }
+        }
+
+        const weddingDate = new Date("September 12, 2026 00:00:00").getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            if (distance < 0) return;
+
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        document.getElementById('rsvpForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const btn = document.getElementById('subBtn');
+            btn.innerHTML = "SENDING...";
+            btn.disabled = true;
+
+            const data = {
+                f1: document.getElementById('f1').value,
+                l1: document.getElementById('l1').value,
+                m1: document.getElementById('m1').value,
+                f2: document.getElementById('f2').value,
+                l2: document.getElementById('l2').value,
+                m2: document.getElementById('m2').value,
+                child: document.getElementById('child').value
+            };
+
+            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) })
+                .then(() => {
+                    document.getElementById('rsvpForm').style.display = 'none';
+                    document.getElementById('thankYou').style.display = 'block';
+                })
+                .catch(() => {
+                    alert("Please try again.");
+                    btn.disabled = false;
+                    btn.innerHTML = "SUBMIT RSVP";
+                });
+        });
+
+        document.querySelectorAll('.top-nav a').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

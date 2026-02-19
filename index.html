@@ -809,7 +809,7 @@
                 'label-children': 'Number of Children', 'submit-btn': 'SUBMIT RSVP', 'sending': 'SENDING...',
                 'thank-you': 'We have received your answer. Thank you!',
                 'placeholder-first': 'Enter first name...', 'placeholder-family': 'Enter family name...',
-                'error-msg': 'Please try again.'
+                'error-msg': 'The response was not received. Please contact us at +40787687653.'
             },
             'ro': {
                 'title': 'Invitație Nuntă | Ana & Codrin',
@@ -832,7 +832,7 @@
                 'label-children': 'Număr de copii', 'submit-btn': 'TRIMITE RSVP', 'sending': 'SE TRIMITE...',
                 'thank-you': 'Am primit răspunsul tău. Mulțumim!',
                 'placeholder-first': 'Introdu prenumele...', 'placeholder-family': 'Introdu numele...',
-                'error-msg': 'Te rugăm să încerci din nou.'
+                'error-msg': 'Răspunsul nu a fost primit. Vă rugăm să ne contactați la +40787687653.'
             }
         };
 
@@ -933,12 +933,18 @@
                 child: document.getElementById('child').value
             };
 
-            fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) })
-                .then(() => {
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Registration failed on server');
                     document.getElementById('rsvpForm').style.display = 'none';
                     document.getElementById('thankYou').style.display = 'block';
                 })
-                .catch(() => {
+                .catch(err => {
+                    console.error('RSVP Submission Error:', err);
                     alert(translations[currentLang]['error-msg']);
                     btn.disabled = false;
                     btn.innerHTML = translations[currentLang]['submit-btn'];

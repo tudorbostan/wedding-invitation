@@ -468,6 +468,14 @@
                 min-width: 70px;
                 padding: 10px;
             }
+
+            .lang-switch {
+                margin: 10px 0 !important;
+                padding: 5px 15px !important;
+                border: 1px solid var(--gold) !important;
+                border-radius: 20px;
+                background: rgba(197, 160, 89, 0.1);
+            }
         }
 
         @keyframes fadeIn {
@@ -487,10 +495,16 @@
 <body>
     <nav class="top-nav">
         <ul>
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#description">STORY</a></li>
-            <li><a href="#location">DETAILS</a></li>
-            <li><a href="#confirmation">RSVP</a></li>
+            <li><a href="#home" data-key="nav-home">HOME</a></li>
+            <li><a href="#description" data-key="nav-story">STORY</a></li>
+            <li><a href="#location" data-key="nav-details">DETAILS</a></li>
+            <li><a href="#confirmation" data-key="nav-rsvp">RSVP</a></li>
+            <li class="lang-switch"
+                style="margin-left: 20px; border-left: 1px solid rgba(197,160,89,0.3); padding-left: 20px;">
+                <a href="#" onclick="switchLang('en'); return false;" id="lang-en" style="opacity: 1;">EN</a>
+                <span style="color: var(--gold); font-size: 0.7rem;">|</span>
+                <a href="#" onclick="switchLang('ro'); return false;" id="lang-ro" style="opacity: 0.5;">RO</a>
+            </li>
         </ul>
     </nav>
 
@@ -506,14 +520,16 @@
             <div class="letter">
                 <div class="letter-photo"></div>
                 <div style="position:relative; z-index:2">
-                    <p style="font-size:0.6rem; letter-spacing:3px; margin:0; color: var(--gold);">THE WEDDING OF</p>
-                    <h2 style="margin:10px 0; font-size: 1.5rem;">Ana & Codrin</h2>
-                    <p style="font-size:0.8rem; margin:0;">12 . 09 . 2026</p>
+                    <p style="font-size:0.6rem; letter-spacing:3px; margin:0; color: var(--gold);"
+                        data-key="wedding-of">THE WEDDING OF</p>
+                    <h2 style="margin:10px 0; font-size: 1.5rem;" data-key="couple-names">Ana & Codrin</h2>
+                    <p style="font-size:0.8rem; margin:0;" data-key="hero-date-short">12 . 09 . 2026</p>
                 </div>
             </div>
         </div>
-        <p
-            style="color:var(--env-color); margin-top:100px; letter-spacing:4px; font-size:0.75rem; font-family: 'Cinzel'; font-weight: bold;">
+        <p id="tap-text"
+            style="color:var(--env-color); margin-top:100px; letter-spacing:4px; font-size:0.75rem; font-family: 'Cinzel'; font-weight: bold;"
+            data-key="tap-to-unveil">
             TAP TO UNVEIL</p>
     </div>
 
@@ -521,9 +537,9 @@
         <div class="hero-section" id="home">
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1>Ana & Codrin</h1>
+                <h1 data-key="couple-names">Ana & Codrin</h1>
                 <div style="margin-top: auto; margin-bottom: 20px;">
-                    <p
+                    <p data-key="hero-date"
                         style="letter-spacing:8px; font-family: 'Cinzel'; font-size:1.4rem; margin: 0; font-weight: bold; text-shadow: 0 4px 15px rgba(0,0,0,0.9), 0 2px 5px rgba(0,0,0,0.8);">
                         SATURDAY, SEPTEMBER 12, 2026
                     </p>
@@ -532,19 +548,19 @@
                 <div id="countdown">
                     <div class="time-box">
                         <span id="days">0</span>
-                        <label>Days</label>
+                        <label data-key="days">Days</label>
                     </div>
                     <div class="time-box">
                         <span id="hours">0</span>
-                        <label>Hours</label>
+                        <label data-key="hours">Hours</label>
                     </div>
                     <div class="time-box">
                         <span id="minutes">0</span>
-                        <label>Mins</label>
+                        <label data-key="mins">Mins</label>
                     </div>
                     <div class="time-box">
                         <span id="seconds">0</span>
-                        <label>Secs</label>
+                        <label data-key="secs">Secs</label>
                     </div>
                 </div>
             </div>
@@ -552,9 +568,9 @@
 
         <div class="content-container">
             <div class="section" id="description">
-                <h2>Celebrate With Us</h2>
+                <h2 data-key="story-title">Celebrate With Us</h2>
                 <div class="ornament">❦</div>
-                <p
+                <p data-key="story-text"
                     style="font-size: 1.2rem; line-height: 2; max-width: 700px; margin: 10px auto 40px; font-style: italic;">
                     Alongside our beloved parents and godparents, join us as we say “I do” and start our life
                     together. What started as a simple meeting grew into a journey filled with laughter,
@@ -565,27 +581,27 @@
                 <div class="family-info"
                     style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 700px; margin: 0 auto; border-top: 1px solid rgba(197, 160, 89, 0.2); padding-top: 40px;">
                     <div>
-                        <h3
+                        <h3 data-key="parents"
                             style="font-family: 'Cinzel'; font-size: 0.8rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 15px;">
                             PARENTS</h3>
-                        <p style="margin: 8px 0; font-size: 1.05rem;">Mariana & Grigore Istrate</p>
-                        <p style="margin: 8px 0; font-size: 1.05rem;">Carmen & Iulian Bostan</p>
+                        <p style="margin: 8px 0; font-size: 1.05rem;" data-key="parents-1">Mariana & Grigore Istrate</p>
+                        <p style="margin: 8px 0; font-size: 1.05rem;" data-key="parents-2">Carmen & Iulian Bostan</p>
                     </div>
                     <div>
-                        <h3
+                        <h3 data-key="godparents"
                             style="font-family: 'Cinzel'; font-size: 0.8rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 15px;">
                             GODPARENTS</h3>
-                        <p style="margin: 8px 0; font-size: 1.05rem;">Claudia & Dan Bǎcanu</p>
+                        <p style="margin: 8px 0; font-size: 1.05rem;" data-key="godparents-names">Claudia & Dan Bǎcanu
+                        </p>
                     </div>
                 </div>
             </div>
-
             <div class="section" id="location">
                 <div class="location-card">
-                    <h2>The Ceremony</h2>
-                    <p style="font-size: 1.3rem;"><strong>Biserica Sfânta Treime</strong></p>
-                    <p style="letter-spacing: 2px;">2:45 PM</p>
-                    <p style="letter-spacing: 2px;">CALEA 13 SEPTEMBRIE 211, BUCUREȘTI</p>
+                    <h2 data-key="ceremony-title">The Ceremony</h2>
+                    <p style="font-size: 1.3rem;"><strong data-key="ceremony-church">Biserica Sfânta Treime</strong></p>
+                    <p style="letter-spacing: 2px;" data-key="ceremony-time">2:45 PM</p>
+                    <p style="letter-spacing: 2px;" data-key="ceremony-addr">CALEA 13 SEPTEMBRIE 211, BUCUREȘTI</p>
                     <div class="map-frame">
                         <iframe
                             src="https://maps.google.com/maps?q=Biserica%20Sfanta%20Treime%20Ghencea%20Bucuresti&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -596,10 +612,10 @@
                 <div class="ornament" style="margin: 80px 0;">✧ ✧ ✧</div>
 
                 <div class="location-card">
-                    <h2>The Celebration</h2>
-                    <p style="font-size: 1.3rem;"><strong>Lagoo Snagov, Salon Luna</strong></p>
-                    <p style="letter-spacing: 2px;">7:30 PM</p>
-                    <p style="letter-spacing: 2px;">DJ101B, Comuna Snagov 077165</p>
+                    <h2 data-key="party-title">The Celebration</h2>
+                    <p style="font-size: 1.3rem;"><strong data-key="party-venue">Lagoo Snagov, Salon Luna</strong></p>
+                    <p style="letter-spacing: 2px;" data-key="party-time">7:30 PM</p>
+                    <p style="letter-spacing: 2px;" data-key="party-addr">DJ101B, Comuna Snagov 077165</p>
                     <div class="map-frame">
                         <iframe
                             src="https://maps.google.com/maps?q=Lagoo%20Snagov%2C%20DJ101B%2C%20Comuna%20Snagov%20077165%2C%20Romania&z=15&output=embed"
@@ -611,73 +627,77 @@
             </div>
 
             <div class="section" id="confirmation">
-                <h2>RSVP</h2>
-                <p style="margin-bottom: 40px; font-style: italic;">Kindly respond by August 1st, 2026</p>
+                <h2 data-key="rsvp-title">RSVP</h2>
+                <p style="margin-bottom: 40px; font-style: italic;" data-key="rsvp-deadline">Kindly respond by August
+                    1st, 2026</p>
 
                 <form id="rsvpForm">
                     <div class="form-group" style="margin-bottom:30px;">
-                        <label>Total Number of Guests</label>
+                        <label data-key="label-guests">Total Number of Guests</label>
                         <select id="guestCount" onchange="updateGuestFields()">
-                            <option value="1">1 Person</option>
-                            <option value="2">2 People</option>
+                            <option value="1" data-key="opt-1person">1 Person</option>
+                            <option value="2" data-key="opt-2people">2 People</option>
                         </select>
                     </div>
 
                     <div class="guest-box">
                         <span
-                            style="font-family: 'Cinzel'; color: var(--gold); display: block; margin-bottom: 15px; font-weight: bold;">GUEST
+                            style="font-family: 'Cinzel'; color: var(--gold); display: block; margin-bottom: 15px; font-weight: bold;"
+                            data-key="guest-one">GUEST
                             ONE</span>
                         <div class="form-row">
                             <div class="form-group">
-                                <label>First Name</label>
+                                <label data-key="first-name">First Name</label>
                                 <input type="text" id="f1" required placeholder="Enter first name..." />
                             </div>
                             <div class="form-group">
-                                <label>Family Name</label>
+                                <label data-key="family-name">Family Name</label>
                                 <input type="text" id="l1" required placeholder="Enter family name..." />
                             </div>
                         </div>
                         <div class="form-group" style="margin-top:15px;">
-                            <label>Menu Choice</label>
+                            <label data-key="menu-choice">Menu Choice</label>
                             <select id="m1">
-                                <option value="Standard">Standard Menu</option>
-                                <option value="Vegetarian">Vegetarian Menu</option>
+                                <option value="Standard" data-key="opt-standard">Standard Menu</option>
+                                <option value="Vegetarian" data-key="opt-vegetarian">Vegetarian Menu</option>
                             </select>
                         </div>
                     </div>
 
                     <div id="guest2Area" class="guest-box" style="display:none;">
                         <span
-                            style="font-family: 'Cinzel'; color: var(--gold); display: block; margin-bottom: 15px; font-weight: bold;">GUEST
+                            style="font-family: 'Cinzel'; color: var(--gold); display: block; margin-bottom: 15px; font-weight: bold;"
+                            data-key="guest-two">GUEST
                             TWO</span>
                         <div class="form-row">
                             <div class="form-group">
-                                <label>First Name</label>
+                                <label data-key="first-name">First Name</label>
                                 <input type="text" id="f2" placeholder="Enter first name..." />
                             </div>
                             <div class="form-group">
-                                <label>Family Name</label>
+                                <label data-key="family-name">Family Name</label>
                                 <input type="text" id="l2" placeholder="Enter family name..." />
                             </div>
                         </div>
                         <div class="form-group" style="margin-top:15px;">
-                            <label>Menu Choice</label>
+                            <label data-key="menu-choice">Menu Choice</label>
                             <select id="m2">
-                                <option value="Standard">Standard Menu</option>
-                                <option value="Vegetarian">Vegetarian Menu</option>
+                                <option value="Standard" data-key="opt-standard">Standard Menu</option>
+                                <option value="Vegetarian" data-key="opt-vegetarian">Vegetarian Menu</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group" style="margin-bottom:30px;">
-                        <label>Number of Children</label>
+                        <label data-key="label-children">Number of Children</label>
                         <input type="number" id="child" value="0" min="0" />
                     </div>
 
-                    <button type="submit" class="submit-btn" id="subBtn">SUBMIT RSVP</button>
+                    <button type="submit" class="submit-btn" id="subBtn" data-key="submit-btn">SUBMIT RSVP</button>
                 </form>
 
-                <h3 id="thankYou" style="display:none; color: var(--gold); margin-top:20px; font-family: 'Cinzel';">We
+                <h3 id="thankYou" style="display:none; color: var(--gold); margin-top:20px; font-family: 'Cinzel';"
+                    data-key="thank-you">We
                     have received your answer. Thank you!</h3>
             </div>
         </div>
@@ -689,6 +709,79 @@
 
     <script>
         const scriptURL = 'YOUR_GOOGLE_URL_HERE';
+        let currentLang = 'en';
+
+        const translations = {
+            'en': {
+                'title': 'Wedding Invitation | Ana & Codrin',
+                'nav-home': 'HOME', 'nav-story': 'STORY', 'nav-details': 'DETAILS', 'nav-rsvp': 'RSVP',
+                'tap-to-unveil': 'TAP TO UNVEIL', 'wedding-of': 'THE WEDDING OF',
+                'couple-names': 'Ana & Codrin',
+                'hero-date': 'SATURDAY, SEPTEMBER 12, 2026', 'hero-date-short': '12 . 09 . 2026',
+                'days': 'Days', 'hours': 'Hours', 'mins': 'Mins', 'secs': 'Secs',
+                'story-title': 'Celebrate With Us',
+                'story-text': 'Alongside our beloved parents and godparents, join us as we say “I do” and start our life together. What started as a simple meeting grew into a journey filled with laughter, adventure and endless support. Your presence on our special day means more to us than words can express.',
+                'parents': 'PARENTS', 'godparents': 'GODPARENTS',
+                'parents-1': 'Mariana & Grigore Istrate', 'parents-2': 'Carmen & Iulian Bostan', 'godparents-names': 'Claudia & Dan Bǎcanu',
+                'ceremony-title': 'The Ceremony', 'ceremony-church': 'Biserica Sfânta Treime', 'ceremony-addr': 'CALEA 13 SEPTEMBRIE 211, BUCUREȘTI', 'ceremony-time': '2:45 PM',
+                'party-title': 'The Celebration', 'party-venue': 'Lagoo Snagov, Salon Luna', 'party-time': '7:30 PM', 'party-addr': 'DJ101B, Comuna Snagov 077165',
+                'rsvp-title': 'RSVP', 'rsvp-deadline': 'Kindly respond by August 1st, 2026',
+                'label-guests': 'Total Number of Guests', 'opt-1person': '1 Person', 'opt-2people': '2 People',
+                'guest-one': 'GUEST ONE', 'guest-two': 'GUEST TWO',
+                'first-name': 'First Name', 'family-name': 'Family Name', 'menu-choice': 'Menu Choice',
+                'opt-standard': 'Standard Menu', 'opt-vegetarian': 'Vegetarian Menu',
+                'label-children': 'Number of Children', 'submit-btn': 'SUBMIT RSVP', 'sending': 'SENDING...',
+                'thank-you': 'We have received your answer. Thank you!',
+                'placeholder-first': 'Enter first name...', 'placeholder-family': 'Enter family name...',
+                'error-msg': 'Please try again.'
+            },
+            'ro': {
+                'title': 'Invitație Nuntă | Ana & Codrin',
+                'nav-home': 'ACASĂ', 'nav-story': 'POVESTEA', 'nav-details': 'DETALII', 'nav-rsvp': 'RSVP',
+                'tap-to-unveil': 'APASĂ PENTRU A DEZVĂLUI', 'wedding-of': 'NUNTA LUI',
+                'couple-names': 'Ana & Codrin',
+                'hero-date': 'SÂMBĂTĂ, 12 SEPTEMBRIE 2026', 'hero-date-short': '12 . 09 . 2026',
+                'days': 'Zile', 'hours': 'Ore', 'mins': 'Min', 'secs': 'Sec',
+                'story-title': 'Sărbătorește alături de noi',
+                'story-text': 'Alături de dragii noștri părinți și nași, vă invităm să ne fiți alături în momentul în care vom spune „DA” și vom porni împreună la drum. Ceea ce a început ca o simplă întâlnire s-a transformat într-o călătorie plină de râsete, aventură și sprijin necondiționat. Prezența voastră în această zi specială înseamnă mai mult pentru noi decât pot exprima cuvintele.',
+                'parents': 'PĂRINȚI', 'godparents': 'NAȘI',
+                'parents-1': 'Mariana & Grigore Istrate', 'parents-2': 'Carmen & Iulian Bostan', 'godparents-names': 'Claudia & Dan Bǎcanu',
+                'ceremony-title': 'Cununia Religioasă', 'ceremony-church': 'Biserica Sfânta Treime', 'ceremony-addr': 'CALEA 13 SEPTEMBRIE 211, BUCUREȘTI', 'ceremony-time': '14:45',
+                'party-title': 'Petrecerea', 'party-venue': 'Lagoo Snagov, Salon Luna', 'party-time': '19:30', 'party-addr': 'DJ101B, Comuna Snagov 077165',
+                'rsvp-title': 'Confirmare RSVP', 'rsvp-deadline': 'Vă rugăm să răspundeți până la 1 august 2026',
+                'label-guests': 'Număr total de invitați', 'opt-1person': '1 Persoană', 'opt-2people': '2 Persoane',
+                'guest-one': 'INVITAT 1', 'guest-two': 'INVITAT 2',
+                'first-name': 'Prenume', 'family-name': 'Nume de familie', 'menu-choice': 'Opțiune Meniu',
+                'opt-standard': 'Meniu Standard', 'opt-vegetarian': 'Meniu Vegetarian',
+                'label-children': 'Număr de copii', 'submit-btn': 'TRIMITE RSVP', 'sending': 'SE TRIMITE...',
+                'thank-you': 'Am primit răspunsul tău. Mulțumim!',
+                'placeholder-first': 'Introdu prenumele...', 'placeholder-family': 'Introdu numele...',
+                'error-msg': 'Te rugăm să încerci din nou.'
+            }
+        };
+
+        function switchLang(lang) {
+            currentLang = lang;
+            document.title = translations[lang]['title'];
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    if (el.tagName === 'OPTION') {
+                        el.textContent = translations[lang][key];
+                    }
+                    else {
+                        el.innerText = translations[lang][key];
+                    }
+                }
+            });
+
+            // Handle placeholders
+            document.querySelectorAll('#f1, #f2').forEach(el => el.placeholder = translations[lang]['placeholder-first']);
+            document.querySelectorAll('#l1, #l2').forEach(el => el.placeholder = translations[lang]['placeholder-family']);
+
+            document.getElementById('lang-en').style.opacity = lang === 'en' ? '1' : '0.5';
+            document.getElementById('lang-ro').style.opacity = lang === 'ro' ? '1' : '0.5';
+        }
 
         function openEnvelope() {
             document.getElementById('envelope').classList.add('open');
@@ -723,6 +816,18 @@
         }
 
         const weddingDate = new Date("September 12, 2026 00:00:00").getTime();
+
+        // Language detection (URL parameter, then Browser setting)
+        const urlParams = new URLSearchParams(window.location.search);
+        const langParam = urlParams.get('lang');
+        const userLang = navigator.language || navigator.userLanguage;
+
+        if (langParam === 'ro' || (!langParam && userLang && userLang.toLowerCase().startsWith('ro'))) {
+            switchLang('ro');
+        } else {
+            switchLang('en');
+        }
+
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
@@ -739,7 +844,7 @@
         document.getElementById('rsvpForm').addEventListener('submit', e => {
             e.preventDefault();
             const btn = document.getElementById('subBtn');
-            btn.innerHTML = "SENDING...";
+            btn.innerHTML = translations[currentLang]['sending'];
             btn.disabled = true;
 
             const data = {
@@ -758,9 +863,9 @@
                     document.getElementById('thankYou').style.display = 'block';
                 })
                 .catch(() => {
-                    alert("Please try again.");
+                    alert(translations[currentLang]['error-msg']);
                     btn.disabled = false;
-                    btn.innerHTML = "SUBMIT RSVP";
+                    btn.innerHTML = translations[currentLang]['submit-btn'];
                 });
         });
 

@@ -703,7 +703,7 @@
             </div>
 
             <div class="section" id="confirmation">
-                <h2 data-key="rsvp-title">Confirmare RSVP</h2>
+                <h2 data-key="rsvp-title">Confirmare Rǎspuns</h2>
                 <p style="margin-bottom: 40px; font-style: italic;" data-key="rsvp-deadline">Vă rugăm să răspundeți până
                     la 1 august 2026</p>
 
@@ -823,7 +823,7 @@
                 'parents-1': 'Mariana & Grigore Istrate', 'parents-2': 'Carmen & Iulian Bostan', 'godparents-names': 'Claudia & Dan Bǎcanu',
                 'ceremony-title': 'Cununia Religioasă', 'ceremony-church': 'Biserica Sfânta Treime', 'ceremony-addr': 'CALEA 13 SEPTEMBRIE 211, BUCUREȘTI', 'ceremony-time': '14:45',
                 'party-title': 'Petrecerea', 'party-venue': 'Lagoo Snagov, Salon Luna', 'party-time': '19:30', 'party-addr': 'DJ101B, COMUNA SNAGOV 077165',
-                'rsvp-title': 'Confirmare RSVP', 'rsvp-deadline': 'Vă rugăm să răspundeți până la 1 august 2026',
+                'rsvp-title': 'Confirmare Rǎspuns', 'rsvp-deadline': 'Vă rugăm să răspundeți până la 1 august 2026',
                 'label-guests': 'Număr total de invitați', 'opt-1person': '1 Persoană', 'opt-2people': '2 Persoane',
                 'guest-one': 'INVITAT 1', 'guest-two': 'INVITAT 2',
                 'first-name': 'Prenume', 'family-name': 'Nume de familie', 'menu-choice': 'Opțiune Meniu',
@@ -935,11 +935,12 @@
 
             fetch(scriptURL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify(data)
             })
-                .then(response => {
-                    if (!response.ok) throw new Error('Registration failed on server');
+                .then(() => {
+                    // no-cors responses are opaque — assume success if fetch didn't throw
                     document.getElementById('rsvpForm').style.display = 'none';
                     document.getElementById('thankYou').style.display = 'block';
                 })

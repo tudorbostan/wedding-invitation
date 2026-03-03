@@ -872,9 +872,52 @@
                     document.querySelector('.top-nav').classList.add('visible');
                     setTimeout(() => {
                         document.getElementById('home').classList.add('revealed');
+                        // Start the auto-scroll tour after the hero has been seen
+                        setTimeout(startAutoScroll, 5000);
+                        // Only start listening for "stop" interactions NOW, 
+                        // so clicking the envelope doesn't kill the tour.
+                        setTimeout(initAutoScrollListeners, 1000);
                     }, 300);
                 }, 800);
             }, 3000);
+        }
+        /* --- AUTO-SCROLL LOGIC --- */
+        let autoScrollTimer;
+        let isAutoScrolling = true;
+        const sections = ['home', 'description', 'location', 'confirmation'];
+        let currentSectionIdx = 0;
+
+        function stopAutoScroll() {
+            if (!isAutoScrolling) return;
+            isAutoScrolling = false;
+            if (autoScrollTimer) clearTimeout(autoScrollTimer);
+            console.log("Auto-scroll disabled by user interaction.");
+        }
+
+        function startAutoScroll() {
+            if (!isAutoScrolling) return;
+
+            currentSectionIdx++;
+            if (currentSectionIdx < sections.length) {
+                const nextSectionId = sections[currentSectionIdx];
+                const element = document.getElementById(nextSectionId);
+
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    // Wait 10 seconds at each section before moving to the next
+                    autoScrollTimer = setTimeout(startAutoScroll, 10000);
+                }
+            } else {
+                isAutoScrolling = false;
+            }
+        }
+
+        function initAutoScrollListeners() {
+            // Detect any user interaction to stop the tour
+            // We only call this AFTER the envelope is opened to avoid the initial click stopping it
+            ['mousedown', 'wheel', 'touchstart', 'keydown'].forEach(evt => {
+                window.addEventListener(evt, stopAutoScroll, { passive: true });
+            });
         }
 
         function updateGuestFields() {
@@ -955,8 +998,13 @@
 
         document.querySelectorAll('.top-nav a').forEach(link => {
             link.addEventListener('click', e => {
+                const href = link.getAttribute('href');
+                if (href === '#' || !href.startsWith('#')) return; // Language switch handles itself
+
                 e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
+                stopAutoScroll(); // Stop tour if user clicks any nav link
+
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth' });
                 }

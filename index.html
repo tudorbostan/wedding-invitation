@@ -406,7 +406,6 @@
             font-size: 0.7rem;
             letter-spacing: 1px;
             color: var(--gold);
-            font-weight: bold;
         }
 
         input,
@@ -525,6 +524,19 @@
                 letter-spacing: 1px;
             }
 
+            /* Family Info Mobile Tweaks */
+            .family-group p {
+                font-size: 0.9rem !important;
+            }
+
+            .family-group {
+                padding: 0 10px !important;
+            }
+
+            .godparents-row p {
+                font-size: 0.9rem !important;
+            }
+
             .top-nav ul {
                 padding: 12px 5px;
                 gap: 8px;
@@ -597,7 +609,7 @@
                 <div class="letter-photo"></div>
                 <div style="position:relative; z-index:2">
                     <p style="font-size:0.6rem; letter-spacing:3px; margin:0; color: var(--gold);"
-                        data-key="wedding-of">INVITAȚIE NUNTǍ</p>
+                        data-key="wedding-of">INVITAȚIE NUNTĂ</p>
                     <h2 style="margin:10px 0; font-size: 1.5rem;" data-key="couple-names">Ana & Codrin</h2>
                     <p style="font-size:0.8rem; margin:0;" data-key="hero-date-short">12 . 09 . 2026</p>
                 </div>
@@ -655,20 +667,33 @@
                 </p>
 
                 <div class="family-info"
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 700px; margin: 0 auto; border-top: 1px solid rgba(197, 160, 89, 0.2); padding-top: 40px;">
-                    <div>
-                        <h3 data-key="parents"
-                            style="font-family: 'Cinzel'; font-size: 0.8rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 15px;">
-                            PĂRINȚI</h3>
-                        <p style="margin: 8px 0; font-size: 1.05rem;" data-key="parents-1">Mariana & Grigore Istrate</p>
-                        <p style="margin: 8px 0; font-size: 1.05rem;" data-key="parents-2">Carmen & Iulian Bostan</p>
+                    style="max-width: 800px; margin: 60px auto 0; border-top: 1px solid rgba(197, 160, 89, 0.2); padding-top: 60px;">
+                    <!-- Shared Parents Header -->
+                    <h3 data-key="parents"
+                        style="font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 25px; text-transform: uppercase; text-align: center;">
+                        PĂRINȚI</h3>
+
+                    <!-- Parents Row: Side-by-Side -->
+                    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 45px;">
+                        <div class="family-group"
+                            style="flex: 1; text-align: right; padding: 0 25px; border-right: 1px solid rgba(197, 160, 89, 0.2);">
+                            <p style="margin: 5px 0; font-size: 1.1rem; font-weight: 400;" data-key="parents-1">Mariana
+                                & Grigore Istrate</p>
+                        </div>
+                        <div class="family-group" style="flex: 1; text-align: left; padding: 0 25px;">
+                            <p style="margin: 5px 0; font-size: 1.1rem; font-weight: 400;" data-key="parents-2">Carmen &
+                                Iulian Bostan</p>
+                        </div>
                     </div>
-                    <div>
+
+                    <!-- Godparents Row -->
+                    <div class="godparents-row" style="text-align: center; position: relative; padding-top: 10px;">
+                        <div style="font-size: 1.2rem; color: var(--gold); margin-bottom: 25px; opacity: 0.5;">✧</div>
                         <h3 data-key="godparents"
-                            style="font-family: 'Cinzel'; font-size: 0.8rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 15px;">
+                            style="font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 15px; text-transform: uppercase;">
                             NAȘI</h3>
-                        <p style="margin: 8px 0; font-size: 1.05rem;" data-key="godparents-names">Claudia & Dan Bǎcanu
-                        </p>
+                        <p style="margin: 8px 0; font-size: 1.1rem; font-weight: 400;" data-key="godparents-names">
+                            Claudia & Dan Băcanu</p>
                     </div>
                 </div>
             </div>
@@ -676,7 +701,8 @@
                 <div class="location-card">
                     <h2 data-key="ceremony-title">Cununia Religioasă</h2>
                     <p style="font-size: 1.3rem;"><strong data-key="ceremony-church">Biserica Sfânta Treime</strong></p>
-                    <p style="letter-spacing: 2px;" data-key="ceremony-time">14:45</p>
+                    <p style="letter-spacing: 2px; font-weight: bold; font-size: 1.1rem;" data-key="ceremony-time">14:45
+                    </p>
                     <p style="letter-spacing: 2px;" data-key="ceremony-addr">CALEA 13 SEPTEMBRIE 211, BUCUREȘTI</p>
                     <div class="map-frame">
                         <iframe
@@ -690,7 +716,8 @@
                 <div class="location-card">
                     <h2 data-key="party-title">Petrecerea</h2>
                     <p style="font-size: 1.3rem;"><strong data-key="party-venue">Lagoo Snagov, Salon Luna</strong></p>
-                    <p style="letter-spacing: 2px;" data-key="party-time">19:30</p>
+                    <p style="letter-spacing: 2px; font-weight: bold; font-size: 1.1rem;" data-key="party-time">19:30
+                    </p>
                     <p style="letter-spacing: 2px;" data-key="party-addr">DJ101B, COMUNCA SNAGOV 077165</p>
                     <div class="map-frame">
                         <iframe
@@ -703,7 +730,7 @@
             </div>
 
             <div class="section" id="confirmation">
-                <h2 data-key="rsvp-title">Confirmare Rǎspuns</h2>
+                <h2 data-key="rsvp-title">Confirmare Răspuns</h2>
                 <p style="margin-bottom: 40px; font-style: italic;" data-key="rsvp-deadline">Vă rugăm să răspundeți până
                     la 1 august 2026</p>
 
@@ -796,7 +823,7 @@
                 'story-title': 'Celebrate With Us',
                 'story-text': 'Alongside our beloved parents and godparents, join us as we say “I do” and start our life together. What started as a simple meeting grew into a journey filled with laughter, adventure and endless support. Your presence on our special day means more to us than words can express.',
                 'parents': 'PARENTS', 'godparents': 'GODPARENTS',
-                'parents-1': 'Mariana & Grigore Istrate', 'parents-2': 'Carmen & Iulian Bostan', 'godparents-names': 'Claudia & Dan Bǎcanu',
+                'parents-1': 'Mariana & Grigore Istrate', 'parents-2': 'Carmen & Iulian Bostan', 'godparents-names': 'Claudia & Dan Băcanu',
                 'ceremony-title': 'The Ceremony', 'ceremony-church': 'Biserica Sfânta Treime', 'ceremony-addr': 'CALEA 13 SEPTEMBRIE 211, BUCUREȘTI', 'ceremony-time': '2:45 PM',
                 'party-title': 'The Celebration', 'party-venue': 'Lagoo Snagov, Salon Luna', 'party-time': '7:30 PM', 'party-addr': 'DJ101B, COMUNA SNAGOV 077165',
                 'rsvp-title': 'RSVP', 'rsvp-deadline': 'Kindly respond by August 1st, 2026',
@@ -813,17 +840,17 @@
             'ro': {
                 'title': 'Invitație Nuntă | Ana & Codrin',
                 'nav-home': 'ACASĂ', 'nav-story': 'POVESTEA', 'nav-details': 'DETALII', 'nav-rsvp': 'RSVP',
-                'tap-to-unveil': 'APASĂ PENTRU A DEZVĂLUI', 'wedding-of': 'INVITAȚIE NUNTǍ',
+                'tap-to-unveil': 'APASĂ PENTRU A DEZVĂLUI', 'wedding-of': 'INVITAȚIE NUNTĂ',
                 'couple-names': 'Ana & Codrin',
                 'hero-date': 'SÂMBĂTĂ, 12 SEPTEMBRIE 2026', 'hero-date-short': '12 . 09 . 2026',
                 'days': 'Zile', 'hours': 'Ore', 'mins': 'Min', 'secs': 'Sec',
                 'story-title': 'Sărbătorește alături de noi',
                 'story-text': 'Alături de dragii noștri părinți și nași, vă invităm să ne fiți alături în momentul în care vom spune „DA” și vom porni împreună la drum. Ceea ce a început ca o simplă întâlnire s-a transformat într-o călătorie plină de râsete, aventură și sprijin necondiționat. Prezența voastră în această zi specială înseamnă mai mult pentru noi decât pot exprima cuvintele.',
                 'parents': 'PĂRINȚI', 'godparents': 'NAȘI',
-                'parents-1': 'Mariana & Grigore Istrate', 'parents-2': 'Carmen & Iulian Bostan', 'godparents-names': 'Claudia & Dan Bǎcanu',
+                'parents-1': 'Mariana & Grigore Istrate', 'parents-2': 'Carmen & Iulian Bostan', 'godparents-names': 'Claudia & Dan Băcanu',
                 'ceremony-title': 'Cununia Religioasă', 'ceremony-church': 'Biserica Sfânta Treime', 'ceremony-addr': 'CALEA 13 SEPTEMBRIE 211, BUCUREȘTI', 'ceremony-time': '14:45',
                 'party-title': 'Petrecerea', 'party-venue': 'Lagoo Snagov, Salon Luna', 'party-time': '19:30', 'party-addr': 'DJ101B, COMUNA SNAGOV 077165',
-                'rsvp-title': 'Confirmare Rǎspuns', 'rsvp-deadline': 'Vă rugăm să răspundeți până la 1 august 2026',
+                'rsvp-title': 'Confirmare Răspuns', 'rsvp-deadline': 'Vă rugăm să răspundeți până la 1 august 2026',
                 'label-guests': 'Număr total de invitați', 'opt-1person': '1 Persoană', 'opt-2people': '2 Persoane',
                 'guest-one': 'INVITAT 1', 'guest-two': 'INVITAT 2',
                 'first-name': 'Prenume', 'family-name': 'Nume de familie', 'menu-choice': 'Opțiune Meniu',

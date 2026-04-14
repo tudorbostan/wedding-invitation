@@ -666,7 +666,7 @@
                     specială înseamnă mai mult pentru noi decât pot exprima cuvintele.
                 </p>
 
-                <div class="family-info"
+                <div id="parents" class="family-info"
                     style="max-width: 800px; margin: 60px auto 0; border-top: 1px solid rgba(197, 160, 89, 0.2); padding-top: 60px;">
                     <!-- Shared Parents Header -->
                     <h3 data-key="parents"
@@ -712,9 +712,9 @@
                     </div>
                 </div>
 
-                <div class="ornament" style="margin: 80px 0;">✧ ✧ ✧</div>
+                <div id="party" class="ornament" style="margin: 80px 0;">✧ ✧ ✧</div>
 
-                <div id="party" class="location-card">
+                <div class="location-card">
                     <h2 data-key="party-title">Petrecerea</h2>
                     <p style="font-size: 1.3rem;"><strong data-key="party-venue">Lagoo Snagov, Salon Luna</strong></p>
                     <p style="letter-spacing: 2px; font-weight: bold; font-size: 1.1rem;" data-key="party-time">19:30
@@ -913,7 +913,7 @@
         /* --- AUTO-SCROLL LOGIC --- */
         let autoScrollTimer;
         let isAutoScrolling = true;
-        const sections = ['home', 'description', 'godparents', 'location', 'party', 'confirmation'];
+        const sections = ['home', 'description', 'parents', 'location', 'party', 'confirmation'];
         let currentSectionIdx = 0;
 
         function stopAutoScroll() {
